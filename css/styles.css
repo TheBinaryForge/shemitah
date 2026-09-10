@@ -356,6 +356,16 @@ h1 em { font-style: normal; color: var(--gold); }
 .cta h2 { color: #14100a; }
 .cta p { color: rgba(26,20,8,.78); }
 .cta .hero-actions { justify-content: center; margin-top: 1rem; }
+.cta-contact {
+  margin-top: .4rem; font-size: .92rem;
+  display: flex; flex-wrap: wrap; gap: .55rem; justify-content: center;
+  color: rgba(26, 20, 8, .7);
+}
+.cta-contact a {
+  color: #14100a; font-weight: 600;
+  text-decoration: underline; text-underline-offset: 3px;
+}
+.cta-contact a:hover { text-decoration: none; }
 
 /* =========================================================
    FOOTER
@@ -368,7 +378,8 @@ h1 em { font-style: normal; color: var(--gold); }
 .footer-inner nav { display: flex; gap: 1.6rem; flex-wrap: wrap; }
 .footer-inner nav a { font-family: var(--font-display); font-weight: 600; font-size: .9rem; color: var(--ink-dim); }
 .footer-inner nav a:hover { color: var(--gold); }
-.footer-meta { font-size: .88rem; color: var(--sage); }
+.footer-meta { font-size: .88rem; color: var(--sage); line-height: 1.9; }
+.footer-meta a { text-decoration: underline; text-underline-offset: 3px; }
 .footer-meta a:hover { color: var(--gold); }
 .footer-legal { padding-block: 1.5rem 2rem; }
 .footer-legal p { font-size: .82rem; color: var(--sage); }
