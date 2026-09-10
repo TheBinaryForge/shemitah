@@ -16,8 +16,8 @@ assets/favicon.svg    Ícone
 robots.txt            Libera indexação + aponta o sitemap
 sitemap.xml           Mapa do site
 site.webmanifest      PWA / ícone em dispositivos
-_headers              Cabeçalhos de segurança e cache (Netlify/Cloudflare Pages)
-netlify.toml          Config de deploy da Netlify (sem build)
+_headers              Cabeçalhos de segurança e cache (Cloudflare Pages)
+_redirects            Redireciona www -> apex (Cloudflare Pages)
 ```
 
 ## Rodar localmente
@@ -32,72 +32,54 @@ Depois abra <http://localhost:8080>.
 
 ## Antes de publicar — trocar os placeholders
 
-1. **Domínio** — hoje está `https://shemitah.com.br`. Faça um find/replace
-   global em `index.html`, `sitemap.xml`, `robots.txt` e `site.webmanifest`.
-2. **WhatsApp** — procure por `5543999999999` em `index.html` e troque pelo
+1. **WhatsApp** — procure por `5543999999999` em `index.html` e troque pelo
    número real (formato `55` + DDD + número, só dígitos).
-3. **Dados de negócio** — no fim do `index.html`, bloco
+2. **Dados de negócio** — no fim do `index.html`, bloco
    `application/ld+json`: telefone, e-mail, endereço e horário reais.
    Isso alimenta o cartão do Google (Google Business).
-4. **`sitemap.xml`** — atualize `<lastmod>` na data da publicação.
+3. **`sitemap.xml`** — atualize `<lastmod>` a cada publicação relevante.
 
-## Deploy
+> Domínio (`https://shemitah.com.br`) já está cravado em `index.html`,
+> `sitemap.xml` e `robots.txt`. Nada a trocar.
 
-### Netlify / Cloudflare Pages (recomendado)
-Arraste a pasta ou conecte o repositório. Sem comando de build,
-diretório de publicação = raiz (`.`). O `_headers` e o `netlify.toml`
-já vão junto.
+## Deploy — Cloudflare Pages
 
-### GitHub Pages
+Repo pode ser **privado**. Sem build. Caminhos relativos.
+`_headers` e `_redirects` são lidos nativamente pelo Cloudflare Pages.
 
-O site já está pronto para o Pages: caminhos relativos (funciona em
-`usuario.github.io/repo/`), `.nojekyll` incluído (serve os arquivos como estão).
+### 1. Ligar o domínio ao Cloudflare (nameservers)
 
-1. Criar o repositório no GitHub (pode ser privado).
-2. Na pasta do projeto:
+1. Conta grátis em <https://dash.cloudflare.com> → **Add a site** → `shemitah.com.br`
+   → plano **Free**.
+2. O Cloudflare mostra **2 nameservers** (ex.: `xxx.ns.cloudflare.com`).
+3. No **Registro.br** (Painel → `shemitah.com.br` → *Alterar servidores DNS*):
+   troque os servidores DNS pelos 2 do Cloudflare → salvar.
+   Propagação: minutos a ~24h. O Cloudflare avisa por e-mail quando ativar.
 
-   ```bash
-   git init
-   git add .
-   git commit -m "Site institucional Shemitah"
-   git branch -M main
-   git remote add origin https://github.com/SEU_USUARIO/shemitah.git
-   git push -u origin main
-   ```
+### 2. Criar o projeto Pages
 
-3. No GitHub: **Settings → Pages → Build and deployment → Source: Deploy from a
-   branch → Branch: `main` / `/ (root)` → Save**.
-4. Em ~1 min o site sai no ar (primeiro em `SEU_USUARIO.github.io/shemitah/`,
-   depois no domínio próprio abaixo).
+1. Cloudflare → **Workers & Pages → Create → Pages → Connect to Git**.
+2. Autorizar o app do Cloudflare no GitHub (pode liberar só `TheBinaryForge/shemitah`).
+3. Selecionar o repo. Configuração de build:
+   - **Production branch:** `main`
+   - **Framework preset:** `None`
+   - **Build command:** *(vazio)*
+   - **Build output directory:** `/`
+4. **Save and Deploy** → sai no ar em `shemitah-xxxx.pages.dev`.
+   Cada `git push` na `main` republica sozinho.
 
-### Domínio próprio — `shemitah.com.br` (já registrado)
+### 3. Domínio customizado
 
-O arquivo **`CNAME`** (raiz, conteúdo `shemitah.com.br`) já está no projeto.
-Falta só o DNS + ligar no GitHub.
+No projeto Pages → **Custom domains → Set up a domain** → adicionar
+`shemitah.com.br` e `www.shemitah.com.br`. Como o DNS já está no Cloudflare,
+os registros são criados automaticamente. SSL sai em poucos minutos.
+O redirect `www → shemitah.com.br` já está no arquivo `_redirects`.
 
-**1. DNS no Registro.br** (Painel → domínio → *Editar Zona / DNS*):
+### 4. Desligar o GitHub Pages
 
-| Tipo  | Nome / Host | Valor |
-|-------|-------------|-------|
-| A     | `@`         | `185.199.108.153` |
-| A     | `@`         | `185.199.109.153` |
-| A     | `@`         | `185.199.110.153` |
-| A     | `@`         | `185.199.111.153` |
-| CNAME | `www`       | `SEU_USUARIO.github.io.` |
-
-(Opcional, IPv6 — 4 registros `AAAA` no `@`:
-`2606:50c0:8000::153`, `...8001::153`, `...8002::153`, `...8003::153`.)
-
-**2. No GitHub:** Settings → Pages → *Custom domain* → `shemitah.com.br` → Save.
-Aguardar o check de DNS ficar verde (pode levar de minutos a algumas horas) e
-então marcar **Enforce HTTPS**.
-
-**3. Conferir:** `https://shemitah.com.br` abre o site e `www` redireciona pra ele.
-`canonical`, `og:url`, `sitemap.xml` e `robots.txt` já apontam pra esse domínio —
-nada mais a trocar.
-
-> `_headers` e `netlify.toml` são ignorados pelo GitHub Pages (cache/segurança
-> extra só valem em Netlify/Cloudflare). Não atrapalham — pode deixar.
+Repo → **Settings → Pages → Source → None** (para não haver dois sites
+disputando o mesmo domínio). Depois, se quiser: **Settings → General →
+Change visibility → Make private**.
 
 ## Depois de publicar (SEO)
 

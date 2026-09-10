@@ -1,0 +1,3 @@
+# Cloudflare Pages — regras de redirecionamento
+# www -> apex (domínio canônico é https://shemitah.com.br)
+https://www.shemitah.com.br/*  https://shemitah.com.br/:splat  301!
