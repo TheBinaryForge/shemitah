@@ -1,0 +1,10 @@
+# Deploy na Netlify — site 100% estático, sem build.
+[build]
+  publish = "."
+  command = ""
+
+[[redirects]]
+  from = "https://www.shemitah.com.br/*"
+  to = "https://shemitah.com.br/:splat"
+  status = 301
+  force = true

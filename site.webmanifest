@@ -1,0 +1,13 @@
+{
+  "name": "Shemitah Projeto e Execução",
+  "short_name": "Shemitah",
+  "description": "Projeto, construção e reforma de espaços comerciais e residenciais em Londrina-PR.",
+  "lang": "pt-BR",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#091E14",
+  "theme_color": "#091E14",
+  "icons": [
+    { "src": "assets/favicon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }
+  ]
+}

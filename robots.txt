@@ -1,0 +1,5 @@
+# Shemitah Projeto e Execução
+User-agent: *
+Allow: /
+
+Sitemap: https://shemitah.com.br/sitemap.xml
