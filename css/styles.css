@@ -140,7 +140,9 @@ h1 em { font-style: normal; color: var(--gold); }
 .site-header[data-scrolled] .header-inner { padding-block: .7rem; }
 
 .brand { display: inline-flex; align-items: center; gap: .7rem; flex-shrink: 0; }
-.brand-mark { color: var(--gold); display: grid; place-items: center; }
+.brand-mark { display: grid; place-items: center; }
+.brand-mark img { width: 36px; height: auto; display: block; }
+.site-footer .brand-mark img { width: 32px; }
 .brand-text { display: grid; line-height: 1.1; }
 .brand-text strong { font-family: var(--font-display); font-weight: 800; font-size: 1.15rem; letter-spacing: -.01em; }
 .brand-text small { font-size: .66rem; letter-spacing: .22em; text-transform: uppercase; color: var(--sage); }
@@ -252,7 +254,7 @@ h1 em { font-style: normal; color: var(--gold); }
 
 /* ---------- cards ---------- */
 .cards { display: grid; gap: 1.25rem; }
-.services { grid-template-columns: repeat(4, 1fr); }
+.services { grid-template-columns: repeat(3, 1fr); }
 
 .card {
   background: var(--bg-alt); border: 1px solid var(--line);

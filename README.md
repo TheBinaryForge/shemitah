@@ -12,7 +12,11 @@ index.html            Página única (todo o conteúdo + SEO + JSON-LD)
 css/styles.css        Estilos
 js/main.js            Menu mobile, reveal ao rolar, header sticky, nav ativa
 assets/img/*          Imagens (Unsplash, baixadas localmente)
-assets/favicon.svg    Ícone
+assets/img/logo.jpeg  Logo original (arte-fonte, não é servida no site)
+assets/img/logo-mark.png  Ícone da marca recortado com fundo transparente (header/rodapé)
+assets/favicon-*.png,
+assets/apple-touch-icon.png,
+assets/icon-*.png      Favicon e ícones gerados a partir da logo
 robots.txt            Libera indexação + aponta o sitemap
 sitemap.xml           Mapa do site
 site.webmanifest      PWA / ícone em dispositivos
